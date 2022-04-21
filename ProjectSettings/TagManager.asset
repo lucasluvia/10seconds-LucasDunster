@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - VCam
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1565627693
     locked: 0
