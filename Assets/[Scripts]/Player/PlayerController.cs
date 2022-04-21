@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public bool isJumping;
     public bool isSprinting;
     public bool canControl;
-    public PlayerState playerState;
+    [SerializeField] PlayerState playerState;
 
     [Header("Movement Variables")]
     [SerializeField] float walkSpeed = 5.0f;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float aimSensitivity = 1.0f;
 
     GameController gameController;
+    CameraBehaviour camera;
 
     //Player Components
     Rigidbody rigidbody;
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        camera = GameObject.Find("Virtual Camera").GetComponent<CameraBehaviour>();
         rigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
 
@@ -211,7 +213,10 @@ public class PlayerController : MonoBehaviour
         transform.position = gameController.currentCheckpoint.position;
     }
 
-
+    public void SetPlayerState(PlayerState newState)
+    {
+        playerState = newState;
+    }
 
     public void OnMovement(InputValue value)
     {

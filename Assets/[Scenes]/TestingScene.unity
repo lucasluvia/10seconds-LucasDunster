@@ -1272,6 +1272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9695a011066cd2c4d80b17904174bd91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FirstPersonMask:
+    serializedVersion: 2
+    m_Bits: 119
+  ThirdPersonMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1158187068
 GameObject:
   m_ObjectHideFlags: 0

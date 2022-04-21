@@ -7,6 +7,8 @@ public class CameraBehaviour : MonoBehaviour
 {
     PlayerController player;
 
+    public LayerMask FirstPersonMask;
+    public LayerMask ThirdPersonMask;
 
     void Start()
     {
@@ -36,6 +38,14 @@ public class CameraBehaviour : MonoBehaviour
 
             player.followTarget.transform.position = new Vector3(player.followTarget.transform.position.x, player.transform.position.y + 1.1f, player.followTarget.transform.position.z);
         }
+    }
+
+    public void SetCullingMask(bool isPlayerVisible)
+    {
+        if (isPlayerVisible)
+            Camera.main.cullingMask = ThirdPersonMask;
+        else
+            Camera.main.cullingMask = FirstPersonMask;
     }
 
 }
