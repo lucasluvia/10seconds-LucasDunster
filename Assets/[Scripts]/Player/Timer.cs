@@ -23,12 +23,17 @@ public class Timer : MonoBehaviour
     TextMeshProUGUI timerText;
     float currentTime;
 
+    GameController gameController;
+
+    Color originalColour;
 
     // Start is called before the first frame update
     void Start()
     {
-        timerText = GetComponentInChildren<TextMeshProUGUI>();
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        timerText = GetComponent<TextMeshProUGUI>();
         currentTime = CountdownTarget;
+        
     }
 
     // Update is called once per frame
@@ -57,6 +62,7 @@ public class Timer : MonoBehaviour
         {
             currentTime = CooldownTarget;
             timerState = TimerState.COOLDOWN;
+            gameController.SetPlatformColour(Color.red);
         }
     }
 
@@ -68,6 +74,8 @@ public class Timer : MonoBehaviour
         {
             currentTime = CountdownTarget;
             timerState = TimerState.COUNTDOWN;
+
+            gameController.SetPlatformColour(new Color(0, 0.122f, 0.247f, 1));
         }
     }
 

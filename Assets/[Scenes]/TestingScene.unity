@@ -302,7 +302,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 432171550}
-  - component: {fileID: 432171549}
   - component: {fileID: 432171548}
   - component: {fileID: 432171547}
   - component: {fileID: 432171546}
@@ -374,23 +373,6 @@ Canvas:
   m_SortingLayerID: 1565627693
   m_SortingOrder: 10
   m_TargetDisplay: 0
---- !u!114 &432171549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432171545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a2bdd809672a742aeac291af0389a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerState: 0
-  CountdownTarget: 10
-  CooldownTarget: 5
-  CountdownColour: {r: 0.17455828, g: 1, b: 0, a: 1}
-  CooldownColour: {r: 1, g: 0, b: 0, a: 1}
 --- !u!224 &432171550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -530,11 +512,11 @@ Mesh:
       format: 0
       dimension: 4
     - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
       offset: 40
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 56
       format: 0
       dimension: 2
     - stream: 0
@@ -573,8 +555,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 1152
-    _typelessdata: 9a0521c1caeb2241000020410000000000000000000080bf0000803f0000000000000000000080bf9a0521c1caeb224166fa1e41caeb2241000020410000000000000000000080bf0000803f0000000000000000000080bf66fa1e41caeb224100002041cdccccbd000020410000000000000000000080bf0000803f0000000000000000000080bf00002041cdccccbd000020c1cdccccbd000020410000000000000000000080bf0000803f0000000000000000000080bf000020c1cdccccbd66fa1e41caeb224100002041bcfe7fbfb886cbbb000000000000000000000000000080bf000080bf000020c133ee214166fa1e41caeb2241000020c1bcfe7fbfb886cbbb000000000000000000000000000080bf000080bf0000204133ee214100002041cdccccbd000020c1bcfe7fbfb886cbbb000000000000000000000000000080bf000080bf00002041feff25be00002041cdccccbd00002041bcfe7fbfb886cbbb000000000000000000000000000080bf000080bf000020c1feff25be66fa1e41caeb2241000020c100000000000000000000803f000080bf0000000000000000000080bf66fa1ec1caeb22419a0521c1caeb2241000020c100000000000000000000803f000080bf0000000000000000000080bf9a052141caeb2241000020c1cdccccbd000020c100000000000000000000803f000080bf0000000000000000000080bf00002041cdccccbd00002041cdccccbd000020c100000000000000000000803f000080bf0000000000000000000080bf000020c1cdccccbd9a0521c1caeb2241000020c1bcfe7f3fb886cb3b0000000000000000000000000000803f000080bf000020c104eb23419a0521c1caeb224100002041bcfe7f3fb886cb3b0000000000000000000000000000803f000080bf0000204104eb2341000020c1cdccccbd00002041bcfe7f3fb886cb3b0000000000000000000000000000803f000080bf000020412e2f1bbd000020c1cdccccbd000020c1bcfe7f3fb886cb3b0000000000000000000000000000803f000080bf000020c12e2f1bbd9a0521c1caeb2241000020c100000000000080bf00000000000080bf0000000000000000000080bf9a052141000020c166fa1e41caeb2241000020c100000000000080bf00000000000080bf0000000000000000000080bf66fa1ec1000020c166fa1e41caeb22410000204100000000000080bf00000000000080bf0000000000000000000080bf66fa1ec1000020419a0521c1caeb22410000204100000000000080bf00000000000080bf0000000000000000000080bf9a05214100002041000020c1cdccccbd00002041000000000000803f000000000000803f0000000000000000000080bf000020c10000204100002041cdccccbd00002041000000000000803f000000000000803f0000000000000000000080bf000020410000204100002041cdccccbd000020c1000000000000803f000000000000803f0000000000000000000080bf00002041000020c1000020c1cdccccbd000020c1000000000000803f000000000000803f0000000000000000000080bf000020c1000020c1
+    m_DataSize: 1536
+    _typelessdata: 9a0521c1caeb2241000020410000000000000000000080bf0000803f0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f9a0521c1caeb224166fa1e41caeb2241000020410000000000000000000080bf0000803f0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f66fa1e41caeb224100002041cdccccbd000020410000000000000000000080bf0000803f0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f00002041cdccccbd000020c1cdccccbd000020410000000000000000000080bf0000803f0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f000020c1cdccccbd66fa1e41caeb224100002041bcfe7fbfb886cbbb000000000000000000000000000080bf000080bf0000000023dbf93d91ed7c3e0000803f000020c133ee214166fa1e41caeb2241000020c1bcfe7fbfb886cbbb000000000000000000000000000080bf000080bf0000000023dbf93d91ed7c3e0000803f0000204133ee214100002041cdccccbd000020c1bcfe7fbfb886cbbb000000000000000000000000000080bf000080bf0000000023dbf93d91ed7c3e0000803f00002041feff25be00002041cdccccbd00002041bcfe7fbfb886cbbb000000000000000000000000000080bf000080bf0000000023dbf93d91ed7c3e0000803f000020c1feff25be66fa1e41caeb2241000020c100000000000000000000803f000080bf0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f66fa1ec1caeb22419a0521c1caeb2241000020c100000000000000000000803f000080bf0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f9a052141caeb2241000020c1cdccccbd000020c100000000000000000000803f000080bf0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f00002041cdccccbd00002041cdccccbd000020c100000000000000000000803f000080bf0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f000020c1cdccccbd9a0521c1caeb2241000020c1bcfe7f3fb886cb3b0000000000000000000000000000803f000080bf0000000023dbf93d91ed7c3e0000803f000020c104eb23419a0521c1caeb224100002041bcfe7f3fb886cb3b0000000000000000000000000000803f000080bf0000000023dbf93d91ed7c3e0000803f0000204104eb2341000020c1cdccccbd00002041bcfe7f3fb886cb3b0000000000000000000000000000803f000080bf0000000023dbf93d91ed7c3e0000803f000020412e2f1bbd000020c1cdccccbd000020c1bcfe7f3fb886cb3b0000000000000000000000000000803f000080bf0000000023dbf93d91ed7c3e0000803f000020c12e2f1bbd9a0521c1caeb2241000020c100000000000080bf00000000000080bf0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f9a052141000020c166fa1e41caeb2241000020c100000000000080bf00000000000080bf0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f66fa1ec1000020c166fa1e41caeb22410000204100000000000080bf00000000000080bf0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f66fa1ec1000020419a0521c1caeb22410000204100000000000080bf00000000000080bf0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f9a05214100002041000020c1cdccccbd00002041000000000000803f000000000000803f0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f000020c10000204100002041cdccccbd00002041000000000000803f000000000000803f0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f000020410000204100002041cdccccbd000020c1000000000000803f000000000000803f0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f00002041000020c1000020c1cdccccbd000020c1000000000000803f000000000000803f0000000000000000000080bf0000000023dbf93d91ed7c3e0000803f000020c1000020c1
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -1666,11 +1648,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550621835}
+  - component: {fileID: 1550621838}
   - component: {fileID: 1550621837}
   - component: {fileID: 1550621836}
   m_Layer: 5
-  m_Name: TimerText
-  m_TagString: Untagged
+  m_Name: Timer
+  m_TagString: Timer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1791,6 +1774,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550621834}
   m_CullTransparentMesh: 1
+--- !u!114 &1550621838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550621834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a2bdd809672a742aeac291af0389a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerState: 0
+  CountdownTarget: 10
+  CooldownTarget: 5
+  CountdownColour: {r: 0.17455828, g: 1, b: 0, a: 1}
+  CooldownColour: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1631316290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,9 +1870,10 @@ GameObject:
   - component: {fileID: 2005034899}
   - component: {fileID: 2005034898}
   - component: {fileID: 2005034897}
+  - component: {fileID: 2005034901}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2157,7 +2158,31 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
   - {x: 1, y: 0, z: 0, w: -1}
-  m_Colors: []
+  m_Colors:
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
+  - {r: 0, g: 0.122, b: 0.247, a: 1}
   m_UnwrapParameters:
     m_HardAngle: 88
     m_PackMargin: 20
@@ -2167,17 +2192,22 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 672095284}
   m_IsSelectable: 1
-  m_SelectedFaces: 04000000
-  m_SelectedEdges:
-  - a: 16
-    b: 17
-  - a: 18
-    b: 16
-  - a: 17
-    b: 19
-  - a: 19
-    b: 18
-  m_SelectedVertices: 10000000110000001200000013000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
+--- !u!65 &2005034901
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005034895}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20.063868, y: 0.41362834, z: 20}
+  m_Center: {x: -0.031933784, y: 0.106814206, z: 0}
 --- !u!1 &2052728266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,14 +2217,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2052728267}
-  - component: {fileID: 2052728272}
   - component: {fileID: 2052728271}
   - component: {fileID: 2052728270}
   - component: {fileID: 2052728269}
   - component: {fileID: 2052728268}
+  - component: {fileID: 2052728272}
   m_Layer: 0
   m_Name: Big Cube
-  m_TagString: Ground
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2516,20 +2546,19 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!114 &2052728272
-MonoBehaviour:
+--- !u!65 &2052728272
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052728266}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c9124a4f86af444084377337095d202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 0}
-  progressionNumber: 0
+  serializedVersion: 2
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2091992252
 GameObject:
   m_ObjectHideFlags: 0
@@ -2561,6 +2590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCheckpoint: {fileID: 0}
   checkpoints: []
+  platforms: []
   CurrentProgression: 0
   StartSpawn: {fileID: 0}
 --- !u!4 &2091992254
@@ -2584,6 +2614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2024144555551162138, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8345822994097453643, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
       propertyPath: m_RootOrder
       value: 2

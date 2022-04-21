@@ -77,6 +77,15 @@ public class PlayerController : MonoBehaviour
 
         transform.position += movementDirection;
 
+        if (!gameController.IsInCountdown() && isGrounded)
+        {
+            GoToCurrentSpawnpoint();
+        }
+
+        if(isGrounded && isJumping)
+        {
+            isJumping = false;
+        }
 
     }
 
@@ -99,14 +108,34 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if ((!other.gameObject.CompareTag("Ground") || !other.gameObject.CompareTag("Checkpoint")) && !isJumping) return;
+        if ((!other.gameObject.CompareTag("Platform") || !other.gameObject.CompareTag("Checkpoint")) && !isJumping) return;
 
         isJumping = false;
+
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Platform"))
+        {
+            isGrounded = true;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("Platform"))
+        {
+            isGrounded = false;
+        }
 
     }
 
     public void GoToCurrentSpawnpoint()
     {
+        rigidbody.velocity = Vector3.zero;
         transform.position = gameController.currentCheckpoint.position;
     }
 
