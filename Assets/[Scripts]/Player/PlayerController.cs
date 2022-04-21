@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public GameObject followTarget;
     [SerializeField] float aimSensitivity = 1.0f;
 
+    GameController gameController;
+
     //Player Components
     Rigidbody rigidbody;
     Animator playerAnimator;
@@ -32,8 +34,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         rigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
+
+        GoToCurrentSpawnpoint();
     }
 
     void Update()
@@ -63,7 +68,6 @@ public class PlayerController : MonoBehaviour
         followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
 
         //movement
-        //if (isJumping) return;
         if (!(inputVector.magnitude > 0)) moveDirection = Vector3.zero;
 
         moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
@@ -93,6 +97,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if ((!other.gameObject.CompareTag("Ground") || !other.gameObject.CompareTag("Checkpoint")) && !isJumping) return;
+
+        isJumping = false;
+
+    }
+
+    public void GoToCurrentSpawnpoint()
+    {
+        transform.position = gameController.currentCheckpoint.position;
+    }
+
+
+
     public void OnMovement(InputValue value)
     {
         inputVector = value.Get<Vector2>();
@@ -117,11 +136,4 @@ public class PlayerController : MonoBehaviour
         lookInput = value.Get<Vector2>();
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if ((!other.gameObject.CompareTag("Ground") || !other.gameObject.CompareTag("Checkpoint")) && !isJumping) return;
-
-        isJumping = false;
-
-    }
 }
