@@ -2170,7 +2170,8 @@ MonoBehaviour:
   isSprinting: 0
   walkSpeed: 5
   runSpeed: 10
-  jumpForce: 15
+  jumpForce: 14.5
+  airVelocityMax: 0.5
   followTarget: {fileID: 1130904924485695777}
   aimSensitivity: 1
 --- !u!114 &2024144555551162136

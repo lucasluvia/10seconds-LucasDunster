@@ -2423,18 +2423,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6922905223455293419, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
-      propertyPath: runSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922905223455293419, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
-      propertyPath: jumpForce
-      value: 14.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922905223455293419, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
-      propertyPath: airVelocityMax
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8345822994097453643, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
       propertyPath: m_RootOrder
       value: 1
