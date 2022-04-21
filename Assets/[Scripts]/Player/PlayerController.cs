@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerState
+{
+    PLAY,
+    DEATH,
+    FALL,
+    START,
+    WIN
+}
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     public bool isJumping;
     public bool isSprinting;
+    public bool canControl;
+    public PlayerState playerState;
 
     [Header("Movement Variables")]
     [SerializeField] float walkSpeed = 5.0f;
@@ -42,6 +52,56 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
+    {
+        switch (playerState)
+        {
+            case PlayerState.PLAY:
+                PlayUpdate();
+                break;
+            case PlayerState.DEATH:
+                DeathUpdate();
+                break;
+            case PlayerState.FALL:
+                FallUpdate();
+                break;
+            case PlayerState.START:
+                StartUpdate();
+                break;
+            case PlayerState.WIN:
+                WinUpdate();
+                break;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (playerState != PlayerState.PLAY) return;
+
+        float currentSpeed;
+
+        if (isSprinting) currentSpeed = runSpeed;
+        else currentSpeed = walkSpeed;
+
+        Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
+        if (localVelocity.x > currentSpeed)
+            localVelocity.x = currentSpeed;
+        if (localVelocity.z > currentSpeed)
+            localVelocity.z = currentSpeed;
+
+        rigidbody.velocity = transform.TransformDirection(localVelocity);
+
+    }
+
+    void StartUpdate()
+    {
+        // player not culled
+        // set animator state
+        // camera starts behind character
+        // camera zoom in to proper position then cull player
+        // enable UI + timer and enter Play state
+    }
+
+    void PlayUpdate()
     {
         //aimsing,looking
         followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
@@ -79,31 +139,45 @@ public class PlayerController : MonoBehaviour
 
         if (!gameController.IsInCountdown() && isGrounded)
         {
+            // enter death state
+            // leave death state
             GoToCurrentSpawnpoint();
+            // enter start state
         }
 
-        if(isGrounded && isJumping)
+        if (isGrounded && isJumping)
         {
             isJumping = false;
         }
 
     }
 
-    void FixedUpdate()
+    void DeathUpdate()
     {
-        float currentSpeed;
+        // disable UI + timer
+        // stop culling character
+        // play death animation
+        // zoom out
+        // OR stop following but keep tracking player as they fall forwards
+        // go to Start state
+    }
 
-        if (isSprinting) currentSpeed = runSpeed;
-        else currentSpeed = walkSpeed;
-
-        Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
-        if (localVelocity.x > currentSpeed)
-            localVelocity.x = currentSpeed;
-        if (localVelocity.z > currentSpeed)
-            localVelocity.z = currentSpeed;
-
-        rigidbody.velocity = transform.TransformDirection(localVelocity);
-
+    void FallUpdate()
+    {
+        // keep UI?
+        // stop culling character
+        // play falling animation
+        // stop following character and freeze camera position and follow the character as they fall
+        // go to Start state
+    }
+    
+    void WinUpdate()
+    {
+        // disable UI + timer
+        // stop culling character
+        // play win animation
+        // turn camera and zoom out
+        // show end level UI
     }
 
     private void OnCollisionEnter(Collision other)
@@ -111,8 +185,6 @@ public class PlayerController : MonoBehaviour
         if ((!other.gameObject.CompareTag("Platform") || !other.gameObject.CompareTag("Checkpoint")) && !isJumping) return;
 
         isJumping = false;
-
-
     }
 
     private void OnTriggerEnter(Collider other)

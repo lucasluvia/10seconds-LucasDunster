@@ -15,8 +15,6 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        timer = GameObject.FindWithTag("Timer").GetComponent<Timer>();
-
         foreach (GameObject checkpoint in GameObject.FindGameObjectsWithTag("Checkpoint"))
         {
             if (checkpoint.GetComponent<CheckpointBehaviour>())
@@ -30,6 +28,7 @@ public class GameController : MonoBehaviour
             platforms.Add(platform);
         }
 
+        timer = GameObject.FindWithTag("Timer").GetComponent<Timer>();
         StartSpawn = GameObject.FindWithTag("StartPoint").GetComponent<Transform>();
         SetCurrentSpawn(StartSpawn, -1);
     }
@@ -77,5 +76,6 @@ public class GameController : MonoBehaviour
         Debug.Log("BAD SIGN!!!!!!!!!");
         return false;
     }
+
 
 }
