@@ -14,14 +14,15 @@ public class Timer : MonoBehaviour
 {
     public TimerState timerState;
 
-    [SerializeField] float CountdownTarget = 11f;
-    [SerializeField] float CooldownTarget = 3f;
+    [SerializeField] float CountdownTarget = 10f;
+    [SerializeField] float CooldownTarget = 5f;
 
     [SerializeField] Color CountdownColour;
     [SerializeField] Color CooldownColour;
 
     TextMeshProUGUI timerText;
     float currentTime;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         currentTime -= Time.deltaTime;
-        timerText.text = ((int)currentTime).ToString();
+        timerText.text = ((int)currentTime+1).ToString();
 
         switch (timerState)
         {
@@ -52,7 +53,7 @@ public class Timer : MonoBehaviour
     {
         timerText.color = CountdownColour;
 
-        if (currentTime < 1f)
+        if (currentTime < 0f)
         {
             currentTime = CooldownTarget;
             timerState = TimerState.COOLDOWN;
@@ -63,7 +64,7 @@ public class Timer : MonoBehaviour
     {
         timerText.color = CooldownColour;
 
-        if (currentTime < 1f)
+        if (currentTime < 0f)
         {
             currentTime = CountdownTarget;
             timerState = TimerState.COUNTDOWN;

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float walkSpeed = 5.0f;
     [SerializeField] float runSpeed = 10.0f;
     [SerializeField] float jumpForce = 5.0f;
+    [SerializeField] float airVelocityMax = 5.0f;
 
     [Header("Camera Variables")]
     public GameObject followTarget;
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
         followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
 
         //movement
-        if (isJumping) return;
+        //if (isJumping) return;
         if (!(inputVector.magnitude > 0)) moveDirection = Vector3.zero;
 
         moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
@@ -71,6 +72,24 @@ public class PlayerController : MonoBehaviour
         Vector3 movementDirection = moveDirection * (currentSpeed * Time.deltaTime);
 
         transform.position += movementDirection;
+
+
+    }
+
+    void FixedUpdate()
+    {
+        float currentSpeed;
+
+        if (isSprinting) currentSpeed = runSpeed;
+        else currentSpeed = walkSpeed;
+
+        Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
+        if (localVelocity.x > currentSpeed)
+            localVelocity.x = currentSpeed;
+        if (localVelocity.z > currentSpeed)
+            localVelocity.z = currentSpeed;
+
+        rigidbody.velocity = transform.TransformDirection(localVelocity);
 
     }
 

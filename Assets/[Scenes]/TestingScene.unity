@@ -334,7 +334,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 963194227}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -342,7 +342,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 1565627693
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &432171549
 MonoBehaviour:
@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerState: 0
-  CountdownTarget: 11
-  CooldownTarget: 6
+  CountdownTarget: 10
+  CooldownTarget: 5
   CountdownColour: {r: 0.17455828, g: 1, b: 0, a: 1}
   CooldownColour: {r: 1, g: 0, b: 0, a: 1}
 --- !u!224 &432171550
@@ -1807,7 +1807,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005034895}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 80dc70a5436947449aace174174c83d9, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -2423,6 +2423,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6922905223455293419, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
+      propertyPath: runSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922905223455293419, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
+      propertyPath: jumpForce
+      value: 14.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922905223455293419, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
+      propertyPath: airVelocityMax
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8345822994097453643, guid: f8349546da3c3eb4ba2d2bf9d18fb729, type: 3}
       propertyPath: m_RootOrder
       value: 1
