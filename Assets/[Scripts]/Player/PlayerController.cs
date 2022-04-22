@@ -46,7 +46,10 @@ public class PlayerController : MonoBehaviour
     Vector2 lookInput = Vector3.zero;
 
     // Animator Hashes
-    public readonly int deathHash = Animator.StringToHash("IsDead");
+    public readonly int deathHash = Animator.StringToHash("IsDeath");
+    public readonly int startHash = Animator.StringToHash("IsStart");
+    public readonly int winHash = Animator.StringToHash("IsWin");
+    public readonly int fallHash = Animator.StringToHash("IsFall");
 
     void Start()
     {
