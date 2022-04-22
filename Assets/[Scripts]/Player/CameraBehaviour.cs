@@ -5,47 +5,48 @@ using Cinemachine;
 
 public class CameraBehaviour : MonoBehaviour
 {
-    PlayerController player;
+    public CameraType type;
+    public LayerMask Mask;
+    [SerializeField] bool isFPCam = false;
 
-    public LayerMask FirstPersonMask;
-    public LayerMask ThirdPersonMask;
+    PlayerController player;
+    CinemachineVirtualCamera vCam;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        vCam = gameObject.GetComponent<CinemachineVirtualCamera>();
     }
 
     void Update()
     {
-        SprintControls();
-
+        if (isFPCam)
+            SprintControls();
     }
 
     private void SprintControls()
     {
-        //sprint changes
         if (player.isSprinting)
         {
             //change fov
-            gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView = 80;
-            //lower camera
-            player.followTarget.transform.position = new Vector3(player.followTarget.transform.position.x, player.transform.position.y + 1.3f, player.followTarget.transform.position.z);
+            if (vCam.m_Lens.FieldOfView < 80)
+                vCam.m_Lens.FieldOfView++;
+            // adjust camera height to make it feel smoother
+            //player.followTarget.position = new Vector3(player.followTarget.position.x, player.transform.position.y + 1.3f, player.followTarget.position.z);
         }
         else
         {
             //change back
-            gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.FieldOfView = 60;
+            if (vCam.m_Lens.FieldOfView > 60)
+                vCam.m_Lens.FieldOfView--;
 
-            player.followTarget.transform.position = new Vector3(player.followTarget.transform.position.x, player.transform.position.y + 1.1f, player.followTarget.transform.position.z);
+            //player.followTarget.position = new Vector3(player.followTarget.position.x, player.transform.position.y + 1.1f, player.followTarget.position.z);
         }
     }
 
-    public void SetCullingMask(bool isPlayerVisible)
+    public void SetCullingMask()
     {
-        if (isPlayerVisible)
-            Camera.main.cullingMask = ThirdPersonMask;
-        else
-            Camera.main.cullingMask = FirstPersonMask;
+        Camera.main.cullingMask = Mask;
     }
 
 }

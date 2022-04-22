@@ -2168,11 +2168,13 @@ MonoBehaviour:
   isGrounded: 0
   isJumping: 0
   isSprinting: 0
+  canControl: 0
+  playerState: 0
   walkSpeed: 5
   runSpeed: 10
   jumpForce: 14.5
   airVelocityMax: 0.5
-  followTarget: {fileID: 1130904924485695777}
+  followTarget: {fileID: 149331313626591047}
   aimSensitivity: 1
 --- !u!114 &2024144555551162136
 MonoBehaviour:
@@ -2219,7 +2221,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &2024144555551162139
 CapsuleCollider:
   m_ObjectHideFlags: 0

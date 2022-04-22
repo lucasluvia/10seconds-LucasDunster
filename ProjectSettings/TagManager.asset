@@ -9,6 +9,8 @@ TagManager:
   - StartPoint
   - Platform
   - Timer
+  - VCam
+  - CameraController
   layers:
   - Default
   - TransparentFX

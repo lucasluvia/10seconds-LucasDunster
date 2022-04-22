@@ -28,11 +28,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float airVelocityMax = 5.0f;
 
     [Header("Camera Variables")]
-    public GameObject followTarget;
+    public Transform followTarget;
     [SerializeField] float aimSensitivity = 1.0f;
 
     GameController gameController;
-    CameraBehaviour camera;
+    CameraController cameraController;
+
+    float waitTimer;
 
     //Player Components
     Rigidbody rigidbody;
@@ -43,14 +45,18 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     Vector2 lookInput = Vector3.zero;
 
+    // Animator Hashes
+    public readonly int deathHash = Animator.StringToHash("IsDead");
+
     void Start()
     {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        camera = GameObject.Find("Virtual Camera").GetComponent<CameraBehaviour>();
+        cameraController = GameObject.FindWithTag("CameraController").GetComponent<CameraController>();
         rigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
 
         GoToCurrentSpawnpoint();
+        SetPlayerState(PlayerState.PLAY);
     }
 
     void Update()
@@ -96,6 +102,7 @@ public class PlayerController : MonoBehaviour
 
     void StartUpdate()
     {
+        //GoToCurrentSpawnpoint();
         // player not culled
         // set animator state
         // camera starts behind character
@@ -106,13 +113,13 @@ public class PlayerController : MonoBehaviour
     void PlayUpdate()
     {
         //aimsing,looking
-        followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
-        followTarget.transform.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.left);
+        followTarget.rotation *= Quaternion.AngleAxis(lookInput.x * aimSensitivity, Vector3.up);
+        followTarget.rotation *= Quaternion.AngleAxis(lookInput.y * aimSensitivity, Vector3.left);
 
-        var angles = followTarget.transform.localEulerAngles;
+        var angles = followTarget.localEulerAngles;
         angles.z = 0;
 
-        var angle = followTarget.transform.localEulerAngles.x;
+        var angle = followTarget.localEulerAngles.x;
 
         if (angle > 180 && angle < 300)
         {
@@ -123,11 +130,11 @@ public class PlayerController : MonoBehaviour
             angles.x = 60;
         }
 
-        followTarget.transform.localEulerAngles = angles;
+        followTarget.localEulerAngles = angles;
 
         //rotate player based on look transform
-        transform.rotation = Quaternion.Euler(0, followTarget.transform.rotation.eulerAngles.y, 0);
-        followTarget.transform.localEulerAngles = new Vector3(angles.x, 0, 0);
+        transform.rotation = Quaternion.Euler(0, followTarget.rotation.eulerAngles.y, 0);
+        followTarget.localEulerAngles = new Vector3(angles.x, 0, 0);
 
         //movement
         if (!(inputVector.magnitude > 0)) moveDirection = Vector3.zero;
@@ -141,10 +148,7 @@ public class PlayerController : MonoBehaviour
 
         if (!gameController.IsInCountdown() && isGrounded)
         {
-            // enter death state
-            // leave death state
-            GoToCurrentSpawnpoint();
-            // enter start state
+            SetPlayerState(PlayerState.DEATH);
         }
 
         if (isGrounded && isJumping)
@@ -154,13 +158,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    
     void DeathUpdate()
     {
+        waitTimer += Time.deltaTime;
+
+
+        if (waitTimer > 1f)
+        {
+            waitTimer = 0f;
+            GoToCurrentSpawnpoint();
+            SetPlayerState(PlayerState.PLAY);
+        }
+
         // disable UI + timer
         // stop culling character
         // play death animation
-        // zoom out
-        // OR stop following but keep tracking player as they fall forwards
+        // wait until animation is done...
         // go to Start state
     }
 
@@ -216,6 +230,32 @@ public class PlayerController : MonoBehaviour
     public void SetPlayerState(PlayerState newState)
     {
         playerState = newState;
+
+        CameraType newCamType = CameraType.FP_CAM;
+        switch (newState)
+        {
+            case PlayerState.PLAY:
+                newCamType = CameraType.FP_CAM;
+                isGrounded = false;
+                break;
+            case PlayerState.DEATH:
+                newCamType = CameraType.BACK_CAM;
+                break;
+            case PlayerState.FALL:
+                newCamType = CameraType.FALL_CAM;
+                break;
+            case PlayerState.START:
+                newCamType = CameraType.BACK_CAM;
+                break;
+            case PlayerState.WIN:
+                newCamType = CameraType.FRONT_CAM;
+                break;
+        }
+        cameraController.SetActiveCamera(newCamType);
+
+        // Set Animation State
+        playerAnimator.SetBool(deathHash, playerState == PlayerState.DEATH);
+
     }
 
     public void OnMovement(InputValue value)
