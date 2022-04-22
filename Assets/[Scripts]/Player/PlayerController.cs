@@ -58,8 +58,7 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
 
-        GoToCurrentSpawnpoint();
-        SetPlayerState(PlayerState.PLAY);
+        SetPlayerState(PlayerState.START);
     }
 
     void Update()
@@ -70,13 +69,13 @@ public class PlayerController : MonoBehaviour
                 PlayUpdate();
                 break;
             case PlayerState.DEATH:
-                DeathUpdate();
+                NonPlayUpdate(2f, PlayerState.START);
                 break;
             case PlayerState.FALL:
-                FallUpdate();
+                NonPlayUpdate(1.5f, PlayerState.START);
                 break;
             case PlayerState.START:
-                StartUpdate();
+                NonPlayUpdate(0.5f, PlayerState.PLAY);
                 break;
             case PlayerState.WIN:
                 WinUpdate();
@@ -101,16 +100,6 @@ public class PlayerController : MonoBehaviour
 
         rigidbody.velocity = transform.TransformDirection(localVelocity);
 
-    }
-
-    void StartUpdate()
-    {
-        //GoToCurrentSpawnpoint();
-        // player not culled
-        // set animator state
-        // camera starts behind character
-        // camera zoom in to proper position then cull player
-        // enable UI + timer and enter Play state
     }
 
     void PlayUpdate()
@@ -161,35 +150,18 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
-    void DeathUpdate()
+    void NonPlayUpdate(float timeInUpdate, PlayerState nextState)
     {
         waitTimer += Time.deltaTime;
 
 
-        if (waitTimer > 1f)
+        if (waitTimer > timeInUpdate)
         {
             waitTimer = 0f;
-            GoToCurrentSpawnpoint();
-            SetPlayerState(PlayerState.PLAY);
+            SetPlayerState(nextState);
         }
-
-        // disable UI + timer
-        // stop culling character
-        // play death animation
-        // wait until animation is done...
-        // go to Start state
     }
 
-    void FallUpdate()
-    {
-        // keep UI?
-        // stop culling character
-        // play falling animation
-        // stop following character and freeze camera position and follow the character as they fall
-        // go to Start state
-    }
-    
     void WinUpdate()
     {
         // disable UI + timer
@@ -213,6 +185,11 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
 
+        if(other.gameObject.CompareTag("FallPlane"))
+        {
+            SetPlayerState(PlayerState.FALL);
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -234,30 +211,39 @@ public class PlayerController : MonoBehaviour
     {
         playerState = newState;
 
+        playerAnimator.SetBool(deathHash, false);
+        playerAnimator.SetBool(winHash, false);
+        playerAnimator.SetBool(fallHash, false);
+        playerAnimator.SetBool(startHash, false);
+
         CameraType newCamType = CameraType.FP_CAM;
         switch (newState)
         {
             case PlayerState.PLAY:
                 newCamType = CameraType.FP_CAM;
-                isGrounded = false;
                 break;
             case PlayerState.DEATH:
                 newCamType = CameraType.BACK_CAM;
+                playerAnimator.SetBool(deathHash, true);
                 break;
             case PlayerState.FALL:
                 newCamType = CameraType.FALL_CAM;
+                playerAnimator.SetBool(fallHash, true);
                 break;
             case PlayerState.START:
+                GoToCurrentSpawnpoint();
+                playerAnimator.SetBool(startHash, true);
+                isGrounded = false;
                 newCamType = CameraType.BACK_CAM;
                 break;
             case PlayerState.WIN:
+                playerAnimator.SetBool(winHash, true);
                 newCamType = CameraType.FRONT_CAM;
                 break;
         }
         cameraController.SetActiveCamera(newCamType);
 
         // Set Animation State
-        playerAnimator.SetBool(deathHash, playerState == PlayerState.DEATH);
 
     }
 
