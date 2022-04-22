@@ -12,6 +12,7 @@ TagManager:
   - VCam
   - CameraController
   - FallPlane
+  - Goal
   layers:
   - Default
   - TransparentFX

@@ -190,6 +190,11 @@ public class PlayerController : MonoBehaviour
             SetPlayerState(PlayerState.FALL);
         }
 
+        if(other.gameObject.CompareTag("Goal"))
+        {
+            SetPlayerState(PlayerState.WIN);
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
