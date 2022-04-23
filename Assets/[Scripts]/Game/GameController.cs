@@ -36,8 +36,11 @@ public class GameController : MonoBehaviour
     // Pass in -1 to override the checking process and always set spawn
     public void SetCurrentSpawn(Transform newSpawn, int progressionNumber)
     {
+        //Debug.Log(progressionNumber + ">" + CurrentProgression);
+
         if (progressionNumber == -1 || progressionNumber > CurrentProgression)
         {
+            CurrentProgression = progressionNumber;
             currentCheckpoint = newSpawn;
         }
 

@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public bool isJumping;
     public bool isSprinting;
     public bool canControl;
+    public bool onCheckpoint;
     [SerializeField] PlayerState playerState;
 
     [Header("Movement Variables")]
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
     Vector2 inputVector = Vector2.zero;
     Vector3 moveDirection = Vector3.zero;
     Vector2 lookInput = Vector3.zero;
+
 
     // Animator Hashes
     public readonly int deathHash = Animator.StringToHash("IsDeath");
@@ -187,6 +189,10 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+        if(other.gameObject.CompareTag("Checkpoint"))
+        {
+            onCheckpoint = true;
+        }
 
         if(other.gameObject.CompareTag("FallPlane"))
         {
@@ -205,6 +211,10 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Platform"))
         {
             isGrounded = false;
+        }
+        if (other.gameObject.CompareTag("Checkpoint"))
+        {
+            onCheckpoint = false;
         }
 
     }
@@ -283,7 +293,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
-        if (isJumping || !isGrounded)
+        if (isJumping || (!isGrounded && !onCheckpoint))
             return;
 
         isJumping = value.isPressed;
