@@ -12,6 +12,7 @@ public class CanvasController : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1;
         SetPauseVisibility(false);
         SetWinVisibility(false);
         SetTimerVisibility(true);
