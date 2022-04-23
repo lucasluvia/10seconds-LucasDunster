@@ -46,7 +46,21 @@ public class CameraBehaviour : MonoBehaviour
 
     public void SetCullingMask()
     {
+        if (type == CameraType.FP_CAM)
+            StartCoroutine(WaitBeforeCulling());
+        else
+        {
+            Camera.main.cullingMask = Mask;
+        }
+    }
+
+    IEnumerator WaitBeforeCulling()
+    {
+        yield return new WaitForSeconds(1f);
+
         Camera.main.cullingMask = Mask;
+
+        yield return null;
     }
 
 }
