@@ -808,6 +808,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &595154081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 595154081, guid: 1f5bf6c364d502a4a9d855801cb9e655, type: 3}
+  m_PrefabInstance: {fileID: 1195839084725767109}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &692086936
 Mesh:
   m_ObjectHideFlags: 0
@@ -2690,10 +2695,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 869818881, guid: 1f5bf6c364d502a4a9d855801cb9e655, type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1195839084838904281, guid: 1f5bf6c364d502a4a9d855801cb9e655, type: 3}
       propertyPath: m_Camera
       value: 
@@ -2786,6 +2787,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5502835477119862912, guid: 1f5bf6c364d502a4a9d855801cb9e655, type: 3}
+      propertyPath: winPanel
+      value: 
+      objectReference: {fileID: 595154081}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f5bf6c364d502a4a9d855801cb9e655, type: 3}
 --- !u!1001 &6497035173156896995

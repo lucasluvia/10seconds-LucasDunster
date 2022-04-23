@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour
                 newCamType = CameraType.BACK_CAM;
                 break;
             case PlayerState.WIN:
-                canvasController.SetTimerVisibility(false);
+                canvasController.SetWinVisibility(true);
                 playerAnimator.SetBool(winHash, true);
                 newCamType = CameraType.FRONT_CAM;
                 break;
@@ -271,7 +271,6 @@ public class PlayerController : MonoBehaviour
 
         if(value.isPressed)
         {
-            canvasController.SetTimerVisibility(false);
             canvasController.SetPauseVisibility(true);
             Time.timeScale = 0;
         }
