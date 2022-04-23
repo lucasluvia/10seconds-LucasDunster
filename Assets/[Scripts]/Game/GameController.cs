@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     public int CurrentProgression = 0;
     public Transform StartSpawn;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource CheckPoint;
+
     Timer timer;
 
     void Awake()
@@ -40,6 +43,8 @@ public class GameController : MonoBehaviour
 
         if (progressionNumber == -1 || progressionNumber > CurrentProgression)
         {
+            if (progressionNumber > 1)
+                CheckPoint.Play();
             CurrentProgression = progressionNumber;
             currentCheckpoint = newSpawn;
         }

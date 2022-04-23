@@ -32,6 +32,12 @@ public class PlayerController : MonoBehaviour
     public Transform followTarget;
     [SerializeField] float aimSensitivity = 1.0f;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioSource Jump;
+    [SerializeField] private AudioSource Fall;
+    [SerializeField] private AudioSource Win;
+    [SerializeField] private AudioSource Die;
+
     GameController gameController;
     CameraController cameraController;
     CanvasController canvasController;
@@ -243,11 +249,13 @@ public class PlayerController : MonoBehaviour
                 newCamType = CameraType.FP_CAM;
                 break;
             case PlayerState.DEATH:
+                Die.Play();
                 canvasController.SetTimerVisibility(false);
                 newCamType = CameraType.BACK_CAM;
                 playerAnimator.SetBool(deathHash, true);
                 break;
             case PlayerState.FALL:
+                Fall.Play();
                 canvasController.SetTimerVisibility(false);
                 newCamType = CameraType.FALL_CAM;
                 playerAnimator.SetBool(fallHash, true);
@@ -260,6 +268,7 @@ public class PlayerController : MonoBehaviour
                 newCamType = CameraType.BACK_CAM;
                 break;
             case PlayerState.WIN:
+                Win.Play();
                 canvasController.SetWinVisibility(true);
                 playerAnimator.SetBool(winHash, true);
                 newCamType = CameraType.FRONT_CAM;
@@ -295,7 +304,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isJumping || (!isGrounded && !onCheckpoint))
             return;
-
+        Jump.Play();
         isJumping = value.isPressed;
         rigidbody.AddForce((transform.up + moveDirection) * jumpForce, ForceMode.Impulse);
     }
