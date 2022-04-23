@@ -2690,9 +2690,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1195839083725133643, guid: 1f5bf6c364d502a4a9d855801cb9e655, type: 3}
-      propertyPath: CountdownTarget
-      value: 10
+    - target: {fileID: 869818881, guid: 1f5bf6c364d502a4a9d855801cb9e655, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1195839084838904281, guid: 1f5bf6c364d502a4a9d855801cb9e655, type: 3}
       propertyPath: m_Camera

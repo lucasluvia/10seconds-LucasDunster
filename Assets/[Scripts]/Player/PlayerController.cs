@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     GameController gameController;
     CameraController cameraController;
+    CanvasController canvasController;
 
     float waitTimer;
 
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         cameraController = GameObject.FindWithTag("CameraController").GetComponent<CameraController>();
+        canvasController = GameObject.FindWithTag("CanvasController").GetComponent<CanvasController>();
         rigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
 
@@ -158,6 +160,7 @@ public class PlayerController : MonoBehaviour
         if (waitTimer > timeInUpdate)
         {
             waitTimer = 0f;
+            
             SetPlayerState(nextState);
         }
     }
@@ -225,36 +228,53 @@ public class PlayerController : MonoBehaviour
         switch (newState)
         {
             case PlayerState.PLAY:
+                canvasController.SetTimerVisibility(true);
+                canControl = true;
                 newCamType = CameraType.FP_CAM;
                 break;
             case PlayerState.DEATH:
+                canvasController.SetTimerVisibility(false);
                 newCamType = CameraType.BACK_CAM;
                 playerAnimator.SetBool(deathHash, true);
                 break;
             case PlayerState.FALL:
+                canvasController.SetTimerVisibility(false);
                 newCamType = CameraType.FALL_CAM;
                 playerAnimator.SetBool(fallHash, true);
                 break;
             case PlayerState.START:
+                canvasController.SetTimerVisibility(true);
                 GoToCurrentSpawnpoint();
                 playerAnimator.SetBool(startHash, true);
                 isGrounded = false;
                 newCamType = CameraType.BACK_CAM;
                 break;
             case PlayerState.WIN:
+                canvasController.SetTimerVisibility(false);
                 playerAnimator.SetBool(winHash, true);
                 newCamType = CameraType.FRONT_CAM;
                 break;
         }
         cameraController.SetActiveCamera(newCamType);
 
-        // Set Animation State
 
     }
 
     public void OnMovement(InputValue value)
     {
         inputVector = value.Get<Vector2>();
+    }
+
+    public void OnPause(InputValue value)
+    {
+        if (playerState == PlayerState.WIN) return;
+
+        if(value.isPressed)
+        {
+            canvasController.SetTimerVisibility(false);
+            canvasController.SetPauseVisibility(true);
+            Time.timeScale = 0;
+        }
     }
 
     public void OnSprint(InputValue value)
@@ -273,6 +293,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnLook(InputValue value)
     {
+        if (!canControl || Time.timeScale != 1) return;
+
         lookInput = value.Get<Vector2>();
     }
 
